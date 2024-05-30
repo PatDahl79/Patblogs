@@ -13,7 +13,8 @@ function Login() {
     const [password, setPassword] = useState('');
 
     //* Login Function
-    const login = async () => {
+    const login = async (e) => {
+        e.preventDefault(); // Prevent form submission
         if (email.trim() === "" || password === "") {
             toast.error('Please fill all fields');
             return;
@@ -25,7 +26,7 @@ function Login() {
             navigate(`/dashboard/${result.user.uid}`); // Navigate to dashboard with user ID
         } catch (error) {
             toast.error('Login Failed');
-            console.log(error);
+            console.error('Error logging in with email and password:', error);
         }
     };
 
@@ -39,14 +40,20 @@ function Login() {
             navigate(`/dashboard/${result.user.uid}`); // Navigate to dashboard with user ID
         } catch (error) {
             toast.error('Google Login Failed');
-            console.log(error);
+            console.error('Error logging in with Google:', error);
         }
     };
 
     return (
         <div className="flex justify-center items-center h-screen">
             <Card className="w-full max-w-[24rem]" style={{ background: mode === 'dark' ? 'rgb(30, 41, 59)' : 'rgb(226, 232, 240)' }}>
-                <CardHeader color="blue" floated={false} shadow={false} className="m-0 grid place-items-center rounded-b-none py-8 px-4 text-center" style={{ background: mode === 'dark' ? 'rgb(226, 232, 240)' : 'rgb(30, 41, 59)' }}>
+                <CardHeader
+                    color="blue"
+                    floated={false}
+                    shadow={false}
+                    className="m-0 grid place-items-center rounded-b-none py-8 px-4 text-center"
+                    style={{ background: mode === 'dark' ? 'rgb(226, 232, 240)' : 'rgb(30, 41, 59)' }}
+                >
                     <div className="mb-4 rounded-full border border-white/10 bg-white/10 p-2 text-white">
                         <div className="flex justify-center">
                             <img src="https://cdn-icons-png.flaticon.com/128/727/727399.png" className="h-20 w-20" alt="Login Icon" />
@@ -57,11 +64,33 @@ function Login() {
                     </Typography>
                 </CardHeader>
                 <CardBody>
-                    <form className="flex flex-col gap-4">
-                        <Input type="email" label="Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                        <Input type="password" label="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                        <Button onClick={login} style={{ background: mode === 'dark' ? 'rgb(226, 232, 240)' : 'rgb(30, 41, 59)', color: mode === 'dark' ? 'black' : 'white' }}>Login</Button>
-                        <Button onClick={loginWithGoogle} style={{ background: 'rgb(66, 133, 244)', color: 'white' }}>Login with Google</Button>
+                    <form className="flex flex-col gap-4" onSubmit={login}>
+                        <Input
+                            type="email"
+                            label="Email"
+                            name="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <Input
+                            type="password"
+                            label="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <Button
+                            type="submit"
+                            style={{ background: mode === 'dark' ? 'rgb(226, 232, 240)' : 'rgb(30, 41, 59)', color: mode === 'dark' ? 'black' : 'white' }}
+                        >
+                            Login
+                        </Button>
+                        <Button
+                            type="button"
+                            onClick={loginWithGoogle}
+                            style={{ background: 'rgb(66, 133, 244)', color: 'white' }}
+                        >
+                            Login with Google
+                        </Button>
                         <div className="mt-3 text-center">
                             <Typography variant="small" style={{ color: mode === 'dark' ? 'white' : 'black' }}>
                                 Don't have an account? <Link to="/signup" style={{ color: mode === 'dark' ? 'rgb(226, 232, 240)' : 'rgb(30, 41, 59)' }}>Sign up</Link>

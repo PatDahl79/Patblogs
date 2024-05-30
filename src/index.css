@@ -2,3 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+
+body.light-mode {
+    background-color: white;
+    color: black;
+}
+
+body.dark-mode {
+    background-color: rgb(17, 24, 39);
+    color: white;
+}

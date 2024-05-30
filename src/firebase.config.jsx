@@ -5,27 +5,35 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCHU1pQnl-m0gWS899BXQtqZ4fLu0iS7Do",
-  authDomain: "patblogpost.firebaseapp.com",
-  projectId: "patblogpost",
-  storageBucket: "patblogpost.appspot.com",
-  messagingSenderId: "504613469264",
-  appId: "1:504613469264:web:f9bce2a4144f807cc2a555"
+  apiKey: "AIzaSyB0n46NlSKsUI_l-CzUZAKd5A29caSOtrA",
+  authDomain: "patblog-75fe0.firebaseapp.com",
+  projectId: "patblog-75fe0",
+  storageBucket: "patblog-75fe0.appspot.com",
+  messagingSenderId: "650968857205",
+  appId: "1:650968857205:web:ada7a8695d23c575ca963c"
 };
 
-/// Initialize Firebase
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 const storage = getStorage(app);
 const provider = new GoogleAuthProvider();
 
-const LogOut = () => {
-  return signOut(auth);
+const LogOut = async () => {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    console.error("Error signing out: ", error);
+  }
 };
 
-const handleLogin = () => {
-  signInWithRedirect(auth, provider);
+const handleLogin = async () => {
+  try {
+    await signInWithRedirect(auth, provider);
+  } catch (error) {
+    console.error("Error during login: ", error);
+  }
 };
 
 export { db, auth, storage, provider, LogOut, handleLogin };
