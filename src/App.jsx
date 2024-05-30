@@ -12,6 +12,7 @@ import { useState } from "react";
 import Login from "./pages/Login";
 import { MyContextProvider } from "./context/myContext";
 import DeleteBlog from "./components/DeleteBlog";
+import CreateBlog from "./pages/createBlog";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -29,6 +30,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/dashboard/:userId" element={<Dashboard />} />
             <Route path="/deleteblog" element={<DeleteBlog/>} />
+            <Route path="/createblog" element={<CreateBlog/>} />
             <Route path="/*" element={<Nopage />} />
           </Routes>
           <Toaster/>
