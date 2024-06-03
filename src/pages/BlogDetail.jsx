@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import GlobalApi from '../Services/GlobalApi';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 
-function Blog() {
+function BlogDetail() {
     const {id}=useParams();
     const [post,setPost]=useState([])
     useEffect(()=>{
@@ -46,4 +46,4 @@ function Blog() {
   )
 }
 
-export default Blog
+export default BlogDetail
